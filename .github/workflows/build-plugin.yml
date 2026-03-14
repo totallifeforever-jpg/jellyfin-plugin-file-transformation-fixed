@@ -52,11 +52,12 @@ EOF
           name: FileTransformation_2.5.5.0
           path: FileTransformation_2.5.5.0.zip
 
-      # 6️⃣ Optional: Create a GitHub Release
+      # 6️⃣ Create GitHub Release
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           tag: "2.5.5.0"
           name: "File Transformation 2.5.5.0 Fixed"
           body: "Auto-built plugin from fix/startup-crash-di-registration branch"
-          files: FileTransformation_2.5.5.0.zip
+          files:
+            - FileTransformation_2.5.5.0.zip
