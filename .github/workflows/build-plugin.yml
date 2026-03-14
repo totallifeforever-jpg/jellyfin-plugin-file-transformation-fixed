@@ -52,12 +52,17 @@ EOF
           name: FileTransformation_2.5.5.0
           path: FileTransformation_2.5.5.0.zip
 
-      # 6️⃣ Create GitHub Release
-      - name: Create Release
+      # 6️⃣ Create GitHub Release (refactored)
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/fix/startup-crash-di-registration'
         uses: ncipollo/release-action@v1
         with:
           tag: "2.5.5.0"
           name: "File Transformation 2.5.5.0 Fixed"
-          body: "Auto-built plugin from fix/startup-crash-di-registration branch"
+          body: |
+            Auto-built plugin from fix/startup-crash-di-registration branch.
+            Includes startup crash DI registration fix for Jellyfin 10.11.6.
           files:
             - FileTransformation_2.5.5.0.zip
+          draft: false
+          prerelease: false
