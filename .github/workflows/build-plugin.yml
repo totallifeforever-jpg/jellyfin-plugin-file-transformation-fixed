@@ -31,7 +31,7 @@ jobs:
           mkdir -p FileTransformation_2.5.5.0
           cp bin/Release/net8.0/Jellyfin.Plugin.FileTransformation.dll FileTransformation_2.5.5.0/
           cat > FileTransformation_2.5.5.0/manifest.json <<
-          'EOF'
+          EOF
 {
   "Name": "File Transformation",
   "Id": "FileTransformation",
