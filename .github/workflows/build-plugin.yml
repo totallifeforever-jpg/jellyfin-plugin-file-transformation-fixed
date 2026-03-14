@@ -11,26 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout the source
       - name: Checkout source
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup .NET 8 SDK
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 8.0.x
 
-      # 3️⃣ Build the plugin
       - name: Build plugin
         run: dotnet build -c Release
 
-      # 4️⃣ Prepare plugin folder with manifest
       - name: Prepare plugin folder
         run: |
           mkdir -p FileTransformation_2.5.5.0
           cp bin/Release/net8.0/Jellyfin.Plugin.FileTransformation.dll FileTransformation_2.5.5.0/
-          cat << EOF2 > FileTransformation_2.5.5.0/manifest.json
+          cat > FileTransformation_2.5.5.0/manifest.json << 'EOF2'
 {
   "Name": "File Transformation",
   "Id": "FileTransformation",
@@ -45,14 +41,12 @@ jobs:
 EOF2
           zip -r FileTransformation_2.5.5.0.zip FileTransformation_2.5.5.0/
 
-      # 5️⃣ Upload the ZIP as a workflow artifact
       - name: Upload ZIP artifact
         uses: actions/upload-artifact@v3
         with:
           name: FileTransformation_2.5.5.0
           path: FileTransformation_2.5.5.0.zip
 
-      # 6️⃣ Optional: Create a GitHub Release
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
